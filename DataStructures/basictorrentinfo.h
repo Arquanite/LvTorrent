@@ -1,13 +1,13 @@
 #ifndef BASICTORRENTINFO_H
 #define BASICTORRENTINFO_H
 
+#include <libtorrent/torrent_handle.hpp>
 #include <cstddef>  //size_t
 #include <QString>
 
 class BasicTorrentInfo {
-public:
-    BasicTorrentInfo();
 
+private:
     /* Raw data for use in some mathematical operations
      * all sizes are in bytes (B)
      * all speeds are in bits per seconds (b/s)
@@ -70,13 +70,45 @@ public:
     QString m_UploadRate;
     QString m_EstimatedTime;
 
-    QString m_State;
+    QString m_State; //TODO: Implement State
     QString m_Progress;
     
     int m_Seeds = 0;
     int m_Peers = 0;
 
+public:
+    BasicTorrentInfo(libtorrent::torrent_handle handle); //TODO: Implement constructor
+    static QString BytesToString(size_t bytes, bool isSpeedUnit = false); //TODO: Implement BytesToString()
+    int CalculateEstimatedTime(); //TODO: Implement CalculateEstimatedTime()
+    static QString SecondsToString(int seconds); //TODO: Implement SecondsToString()
 
+    //Raw data
+    size_t Size_R() const;
+    size_t TotalSize_R() const;
+    size_t Downloaded_R() const;
+    size_t Uploaded_R() const;
+    size_t ToDownload_R() const;
+    int DownloadRate_R() const;
+    int UploadRate_R() const;
+    int EstimatedTime_R() const;
+    float State_R() const;
+    float Progress_R() const;
+
+    //Human-readable data
+    QString Name() const;
+    QString SavePath() const;
+    QString Size() const;
+    QString TotalSize() const;
+    QString Downloaded() const;
+    QString ToDownload() const;
+    QString Uploaded() const;
+    QString DownloadRate() const;
+    QString UploadRate() const;
+    QString EstimatedTime() const;
+    QString State() const;
+    QString Progress() const;
+    int Seeds() const;
+    int Peers() const;
 };
 
 #endif // BASICTORRENTINFO_H

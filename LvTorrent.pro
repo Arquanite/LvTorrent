@@ -11,16 +11,22 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = LvTorrent
 TEMPLATE = app
 
+LIBS += -LLIBs -lboost_system
+
+INCLUDEPATH  += UI\
+                DataStructures\
+                Widgets\
+                libtorrent\
 
 SOURCES += main.cpp\
-        lvtorrent.cpp\
-    session.cpp \
-    basictorrentinfo.cpp \
-    detailedtorrentinfo.cpp
+        UI/lvtorrent.cpp\
+        session.cpp \
+        DataStructures/basictorrentinfo.cpp \
+        DataStructures/detailedtorrentinfo.cpp
 
-HEADERS  += lvtorrent.h\
-    session.h \
-    basictorrentinfo.h \
-    detailedtorrentinfo.h
+HEADERS  += UI/lvtorrent.h\
+            session.h \
+            DataStructures/basictorrentinfo.h \
+            DataStructures/detailedtorrentinfo.h
 
-FORMS    += lvtorrent.ui
+FORMS    += UI/lvtorrent.ui
