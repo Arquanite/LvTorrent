@@ -13,7 +13,7 @@ TEMPLATE = app
 
 LIBS += -L$$PWD/Libs/ -lboost_system
 LIBS += -L$$PWD/Libs/ -ltorrent-rasterbar
-#DEPENDPATH += $$PWD/Libs
+DEPENDPATH += $$PWD/Libs
 
 INCLUDEPATH  += UI\
                 DataStructures\
