@@ -1,5 +1,5 @@
-*.user*
-*.user
+*.pro.user
+*.pro.user.*
 *.autosave*
 
 libtorrent/*
