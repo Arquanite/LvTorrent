@@ -11,7 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = LvTorrent
 TEMPLATE = app
 
-LIBS += -LLIBs -lboost_system
+LIBS += -L$$PWD/Libs/ -lboost_system
+LIBS += -L$$PWD/Libs/ -ltorrent-rasterbar
+#DEPENDPATH += $$PWD/Libs
 
 INCLUDEPATH  += UI\
                 DataStructures\
