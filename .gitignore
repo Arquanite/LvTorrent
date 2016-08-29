@@ -2,4 +2,7 @@
 *.autosave*
 
 libtorrent/*
+!libtorrent/"Place libtorrent headers here"
 Libs/*
+!Libs/"Place boost_system shared library here"
+!Libs/"Place libtorrent shared library here"
