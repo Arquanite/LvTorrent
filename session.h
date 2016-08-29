@@ -3,9 +3,10 @@
 
 #include <QObject>
 
-class Session : public QObject
-{
+class Session : public QObject {
     Q_OBJECT
+private:
+
 public:
     explicit Session(QObject *parent = 0);
 
