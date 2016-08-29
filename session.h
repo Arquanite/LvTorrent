@@ -13,8 +13,12 @@ public:
     bool AddMagnetLink(QString magnet, QString savePath);
     bool RemoveTorrent();
 
-signals:
+    bool SaveFastResumeData();
+    bool LoadTorrents();
 
+signals:
+    void AddedTorrent(QString name);
+    void RemovedTorrent(QString name);
 public slots:
 };
 
