@@ -2,8 +2,24 @@
 #define BASICTORRENTINFO_H
 
 #include <libtorrent/torrent_handle.hpp>
+#include <libtorrent/torrent_status.hpp>
 #include <cstddef>  //size_t
+#include <QVector>
 #include <QString>
+#include <QObject> //tr()
+
+enum TorrentState {
+    QueuedForChecking,
+    CheckingFiles,
+    DownloadingMetadata,
+    Downloading,
+    Finished,
+    Seeding,
+    Allocating,
+    CheckingResumeData,
+    Paused,
+    InQueue
+};
 
 class BasicTorrentInfo {
 
@@ -16,16 +32,17 @@ private:
      */
 
     size_t m_Size_R = 0;
-    size_t m_TotalSize_R = 0;
     size_t m_Downloaded_R = 0;
-    size_t m_Uploaded_R = 0;
     size_t m_ToDownload_R = 0;
+
+    size_t m_TotalDownload_R = 0;
+    size_t m_TotalUpload_R = 0;
 
     int m_DownloadRate_R = 0;
     int m_UploadRate_R = 0;
     int m_EstimatedTime_R = 0;
 
-    float m_State_R = 0; //NOTE: What State_R does?
+    TorrentState m_State_R = Paused;
     float m_Progress_R = 0;
 
     /* Human-readable data for use in UI
@@ -52,7 +69,7 @@ private:
      * If time is bigger than 60 seconds it is always displayed
      * with two units - higher and lower (e.g. 5m 23s or 5d 17h).
      *
-     * TODO: Documentation for State
+     * State is string representation of State_R (enum TorrentState).
      *
      * Progress is percentage value (e.g. 35.4%).
      */
@@ -61,54 +78,65 @@ private:
     QString m_SavePath;
 
     QString m_Size;
-    QString m_TotalSize;
     QString m_Downloaded;
     QString m_ToDownload;
-    QString m_Uploaded;
+
+    QString m_TotalDownload;
+    QString m_TotalUpload;
 
     QString m_DownloadRate;
     QString m_UploadRate;
     QString m_EstimatedTime;
 
-    QString m_State; //TODO: Implement State
+    QString m_State;
     QString m_Progress;
     
     int m_Seeds = 0;
     int m_Peers = 0;
 
 public:
-    BasicTorrentInfo(libtorrent::torrent_handle handle); //TODO: Implement constructor
-    static QString BytesToString(size_t bytes, bool isSpeedUnit = false); //TODO: Implement BytesToString()
-    int CalculateEstimatedTime(); //TODO: Implement CalculateEstimatedTime()
-    static QString SecondsToString(int seconds); //TODO: Implement SecondsToString()
+    BasicTorrentInfo(libtorrent::torrent_handle handle);
+    static QString BytesToString(size_t bytes, bool isSpeedUnit = false);
+    static QString SecondsToString(int seconds);
+    static QString PercentToString(float percent);
+    static QString StateToString(TorrentState state);
 
     //Raw data
     size_t Size_R() const;
-    size_t TotalSize_R() const;
     size_t Downloaded_R() const;
-    size_t Uploaded_R() const;
     size_t ToDownload_R() const;
+
+    size_t TotalDownload_R() const;
+    size_t TotalUpload_R() const;
+
     int DownloadRate_R() const;
     int UploadRate_R() const;
     int EstimatedTime_R() const;
-    float State_R() const;
+
+    int State_R() const;
     float Progress_R() const;
 
     //Human-readable data
     QString Name() const;
     QString SavePath() const;
+
     QString Size() const;
-    QString TotalSize() const;
     QString Downloaded() const;
     QString ToDownload() const;
-    QString Uploaded() const;
+
+    QString TotalDownload() const;
+    QString TotalUpload() const;
+
     QString DownloadRate() const;
     QString UploadRate() const;
     QString EstimatedTime() const;
+
     QString State() const;
     QString Progress() const;
+
     int Seeds() const;
     int Peers() const;
+
 };
 
 #endif // BASICTORRENTINFO_H
