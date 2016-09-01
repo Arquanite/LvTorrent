@@ -1,5 +1,9 @@
 #include "basictorrentinfo.h"
 
+BasicTorrentInfo::BasicTorrentInfo(){
+
+}
+
 BasicTorrentInfo::BasicTorrentInfo(libtorrent::torrent_handle handle){
     libtorrent::torrent_status status = handle.status();
     m_Size_R = status.total_wanted;

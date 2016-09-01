@@ -95,6 +95,7 @@ private:
     int m_Peers = 0;
 
 public:
+    BasicTorrentInfo();
     BasicTorrentInfo(libtorrent::torrent_handle handle);
     static QString BytesToString(size_t bytes, bool isSpeedUnit = false);
     static QString SecondsToString(int seconds);
