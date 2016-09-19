@@ -6,31 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>206</height>
+    <width>753</width>
+    <height>504</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>LvTorrent v0.0a</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
-  </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: #424242</string>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <property name="tabShape">
-   <enum>QTabWidget::Rounded</enum>
-  </property>
-  <widget class="QWidget" name="centralWidget">
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -46,107 +36,740 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
+    <item>
+     <widget class="QWidget" name="Toolbar" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>36</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #eee</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>4</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>2</number>
+       </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="ToolbarButton" name="Filter">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Filter.png</normaloff>:/Resources/Icons/Toolbar/Normal/Filter.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; background-color: #c0c0c0</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="midLineWidth">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="AddMagnet">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/AddMagnet.png</normaloff>:/Resources/Icons/Toolbar/Normal/AddMagnet.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="AddTorrent">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/AddTorrent.png</normaloff>:/Resources/Icons/Toolbar/Normal/AddTorrent.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="RemoveTorrent">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/RemoveTorrent.png</normaloff>:/Resources/Icons/Toolbar/Normal/RemoveTorrent.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="Resume">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Resume.png</normaloff>:/Resources/Icons/Toolbar/Normal/Resume.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="Pause">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Pause.png</normaloff>:/Resources/Icons/Toolbar/Normal/Pause.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_2">
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; background-color: #c0c0c0</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="midLineWidth">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="Shutdown">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Shutdown.png</normaloff>:/Resources/Icons/Toolbar/Normal/Shutdown.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="Limits">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Limits.png</normaloff>:/Resources/Icons/Toolbar/Normal/Limits.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_3">
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; background-color: #c0c0c0</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="midLineWidth">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ToolbarButton" name="Menu">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/Resources/Icons/Toolbar/Normal/Menu.png</normaloff>:/Resources/Icons/Toolbar/Normal/Menu.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="MainView">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="Sidebar" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #424242</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="All">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #f44336;
+}
+
+QPushButton:checked{
+	background-color: #f44336;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>All</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Resources/Icons/Sidebar/Normal/all.png</normaloff>
+             <normalon>:/Resources/Icons/Sidebar/Pressed/all.png</normalon>:/Resources/Icons/Sidebar/Normal/all.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Downloading">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #2196f3;
+}
+
+QPushButton:checked{
+	background-color: #2196f3;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Downloading</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Resources/Icons/Sidebar/Normal/downloading.png</normaloff>
+             <normalon>:/Resources/Icons/Sidebar/Pressed/downloading.png</normalon>:/Resources/Icons/Sidebar/Normal/downloading.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Seeding">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #009688;
+}
+
+QPushButton:checked{
+	background-color: #009688;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Seeding</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Resources/Icons/Sidebar/Normal/seeding.png</normaloff>
+             <normalon>:/Resources/Icons/Sidebar/Pressed/seeding.png</normalon>:/Resources/Icons/Sidebar/Normal/seeding.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Finished">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #4caf50;
+}
+
+QPushButton:checked{
+	background-color: #4caf50;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Finished</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Resources/Icons/Sidebar/Normal/finished.png</normaloff>
+             <normalon>:/Resources/Icons/Sidebar/Pressed/finished.png</normalon>:/Resources/Icons/Sidebar/Normal/finished.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="waiting">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>36</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border: 0px;
+	text-align: left;
+	color: #ff9800;
+	text-decoration: none;
+}
+
+QPushButton:checked{
+	background-color: #ff9800;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+           </property>
+           <property name="text">
+            <string>Waiting</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources.qrc">
+             <normaloff>:/Resources/Icons/Sidebar/Normal/waiting.png</normaloff>
+             <normalon>:/Resources/Icons/Sidebar/Pressed/waiting.png</normalon>:/Resources/Icons/Sidebar/Normal/waiting.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>32</width>
+             <height>32</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>91</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane {
+	border: 0;
+}
+
+QTabBar::tab {
+	padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+QTabBar::tab:selected {
+	color: white;
+	background-color: #d64937;
+}
+
+QTabBar::tab:!selected{
+	color: white;
+	background-color: #ab3a2c;
+	margin-top: 2px;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <property name="styleSheet">
+        <string notr="true">background-color: #fff</string>
+       </property>
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QTableView" name="tableView"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>472</width>
-     <height>0</height>
+     <width>753</width>
+     <height>26</height>
     </rect>
    </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>0</height>
-    </size>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="nativeMenuBar">
-    <bool>false</bool>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="locale">
-     <locale language="English" country="UnitedStates"/>
-    </property>
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionAddTorrenFile"/>
-    <addaction name="separator"/>
-    <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="locale">
-     <locale language="English" country="UnitedStates"/>
-    </property>
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionHelp"/>
-    <addaction name="separator"/>
-    <addaction name="actionAbout"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>18</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
-   </property>
-  </widget>
-  <action name="actionAddTorrenFile">
-   <property name="text">
-    <string>Add .torrent file</string>
-   </property>
-   <property name="toolTip">
-    <string>Add .torrent file</string>
-   </property>
-  </action>
-  <action name="actionExit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-   <property name="toolTip">
-    <string>Save and exit</string>
-   </property>
-  </action>
-  <action name="actionHelp">
-   <property name="text">
-    <string>Help</string>
-   </property>
-   <property name="toolTip">
-    <string>Help</string>
-   </property>
-  </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About LvTorrent</string>
-   </property>
-   <property name="toolTip">
-    <string>About LvTorrent</string>
-   </property>
-  </action>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>ToolbarButton</class>
+   <extends>QPushButton</extends>
+   <header>toolbarbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -17,18 +17,23 @@ DEPENDPATH += $$PWD/Libs
 
 INCLUDEPATH  += UI\
                 DataStructures\
-                Widgets\
+                UI/Widgets\
                 libtorrent\
 
 SOURCES += main.cpp\
         UI/lvtorrent.cpp\
         session.cpp \
         DataStructures/basictorrentinfo.cpp \
-        DataStructures/detailedtorrentinfo.cpp
+        DataStructures/detailedtorrentinfo.cpp \
+        UI/Widgets/toolbarbutton.cpp
 
 HEADERS  += UI/lvtorrent.h\
             session.h \
             DataStructures/basictorrentinfo.h \
-            DataStructures/detailedtorrentinfo.h
+            DataStructures/detailedtorrentinfo.h \
+            UI/Widgets/toolbarbutton.h
 
-FORMS    += UI/lvtorrent.ui
+FORMS    += UI/lvtorrent.ui \
+
+RESOURCES += \
+    resources.qrc

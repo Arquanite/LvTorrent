@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resources/Icons/Sidebar/Normal/all.png</file>
+        <file>Resources/Icons/Sidebar/Normal/downloading.png</file>
+        <file>Resources/Icons/Sidebar/Normal/finished.png</file>
+        <file>Resources/Icons/Sidebar/Normal/seeding.png</file>
+        <file>Resources/Icons/Sidebar/Normal/waiting.png</file>
+        <file>Resources/Icons/Sidebar/Pressed/all.png</file>
+        <file>Resources/Icons/Sidebar/Pressed/downloading.png</file>
+        <file>Resources/Icons/Sidebar/Pressed/finished.png</file>
+        <file>Resources/Icons/Sidebar/Pressed/seeding.png</file>
+        <file>Resources/Icons/Sidebar/Pressed/waiting.png</file>
+        <file>Resources/Icons/Toolbar/Hover/AddMagnet.png</file>
+        <file>Resources/Icons/Toolbar/Hover/RemoveTorrent.png</file>
+        <file>Resources/Icons/Toolbar/Hover/AddTorrent.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Filter.png</file>
+        <file>Resources/Icons/Toolbar/Normal/AddMagnet.png</file>
+        <file>Resources/Icons/Toolbar/Normal/RemoveTorrent.png</file>
+        <file>Resources/Icons/Toolbar/Normal/AddTorrent.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Filter.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Pause.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Resume.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Menu.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Shutdown.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Pause.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Resume.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Menu.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Shutdown.png</file>
+        <file>Resources/Icons/Toolbar/Normal/Limits.png</file>
+        <file>Resources/Icons/Toolbar/Hover/Limits.png</file>
+    </qresource>
+</RCC>
