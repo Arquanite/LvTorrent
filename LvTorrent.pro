@@ -18,6 +18,7 @@ DEPENDPATH += $$PWD/Libs
 INCLUDEPATH  += UI\
                 DataStructures\
                 UI/Widgets\
+                Models\
                 libtorrent\
 
 SOURCES += main.cpp\
@@ -25,13 +26,15 @@ SOURCES += main.cpp\
         session.cpp \
         DataStructures/basictorrentinfo.cpp \
         DataStructures/detailedtorrentinfo.cpp \
-        UI/Widgets/toolbarbutton.cpp
+        UI/Widgets/toolbarbutton.cpp \
+    Models/torrentlistmodel.cpp
 
 HEADERS  += UI/lvtorrent.h\
             session.h \
             DataStructures/basictorrentinfo.h \
             DataStructures/detailedtorrentinfo.h \
-            UI/Widgets/toolbarbutton.h
+            UI/Widgets/toolbarbutton.h \
+    Models/torrentlistmodel.h
 
 FORMS    += UI/lvtorrent.ui \
 

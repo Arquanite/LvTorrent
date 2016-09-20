@@ -169,6 +169,31 @@
         </widget>
        </item>
        <item>
+        <widget class="Line" name="line_2">
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none; background-color: #c0c0c0</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="midLineWidth">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="ToolbarButton" name="Resume">
          <property name="styleSheet">
           <string notr="true">background-color: rgba(255, 255, 255, 0); border: none;</string>
@@ -205,31 +230,6 @@
            <width>32</width>
            <height>32</height>
           </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Line" name="line_2">
-         <property name="maximumSize">
-          <size>
-           <width>1</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border: none; background-color: #c0c0c0</string>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="lineWidth">
-          <number>0</number>
-         </property>
-         <property name="midLineWidth">
-          <number>0</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
@@ -335,28 +335,437 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="MainView">
-      <property name="spacing">
-       <number>0</number>
+     <widget class="QSplitter" name="splitter">
+      <property name="styleSheet">
+       <string notr="true">QSplitter::handle{
+	background-color: #424242;
+}</string>
       </property>
-      <item>
-       <widget class="QWidget" name="Sidebar" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QWidget" name="">
+       <layout class="QHBoxLayout" name="MainView">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>150</width>
-          <height>16777215</height>
-         </size>
-        </property>
+        <item>
+         <widget class="QWidget" name="Sidebar" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #424242</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="All">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>36</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #f44336;
+}
+
+QPushButton:checked{
+	background-color: #f44336;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>All</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Resources/Icons/Sidebar/Normal/all.png</normaloff>
+               <normalon>:/Resources/Icons/Sidebar/Pressed/all.png</normalon>:/Resources/Icons/Sidebar/Normal/all.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Downloading">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>36</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #2196f3;
+}
+
+QPushButton:checked{
+	background-color: #2196f3;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Downloading</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Resources/Icons/Sidebar/Normal/downloading.png</normaloff>
+               <normalon>:/Resources/Icons/Sidebar/Pressed/downloading.png</normalon>:/Resources/Icons/Sidebar/Normal/downloading.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Seeding">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>36</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #009688;
+}
+
+QPushButton:checked{
+	background-color: #009688;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Seeding</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Resources/Icons/Sidebar/Normal/seeding.png</normaloff>
+               <normalon>:/Resources/Icons/Sidebar/Pressed/seeding.png</normalon>:/Resources/Icons/Sidebar/Normal/seeding.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="Finished">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>36</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border: none;
+	text-align: left;
+	color: #4caf50;
+}
+
+QPushButton:checked{
+	background-color: #4caf50;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Finished</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Resources/Icons/Sidebar/Normal/finished.png</normaloff>
+               <normalon>:/Resources/Icons/Sidebar/Pressed/finished.png</normalon>:/Resources/Icons/Sidebar/Normal/finished.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="waiting">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>36</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+	border: 0px;
+	text-align: left;
+	color: #ff9800;
+	text-decoration: none;
+}
+
+QPushButton:checked{
+	background-color: #ff9800;
+	color: white;
+}
+
+QPushButton:hover{
+	color: white;
+}</string>
+             </property>
+             <property name="text">
+              <string>Waiting</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources.qrc">
+               <normaloff>:/Resources/Icons/Sidebar/Normal/waiting.png</normaloff>
+               <normalon>:/Resources/Icons/Sidebar/Pressed/waiting.png</normalon>:/Resources/Icons/Sidebar/Normal/waiting.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>true</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>91</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableView" name="TorrentList">
+          <property name="styleSheet">
+           <string notr="true">QHeaderView::section {
+	color: white;
+	background-color: #424242;
+	border: 0px;
+	padding: 4px;
+}
+
+QHeaderView::section:hover {
+	color: white;
+	background-color: #f44336;
+}
+
+QTableView {
+	background-color: white;
+	selection-background-color: #f44336;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="horizontalScrollMode">
+           <enum>QAbstractItemView::ScrollPerPixel</enum>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QTabWidget" name="Tabs">
+       <property name="styleSheet">
+        <string notr="true">QTabWidget::pane {
+	border: 0;
+}
+
+QTabBar::tab {
+	padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+QTabBar::tab:selected {
+	color: white;
+	background-color: #f44336;
+}
+
+QTabBar::tab:!selected{
+	color: white;
+	background-color: #D32F2F;
+	margin-top: 2px;
+}</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="TabInfo">
         <property name="styleSheet">
-         <string notr="true">background-color: #424242</string>
+         <string notr="true">background-color: #fff</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <attribute name="title">
+         <string>Info</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -373,377 +782,20 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="All">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border: none;
-	text-align: left;
-	color: #f44336;
-}
-
-QPushButton:checked{
-	background-color: #f44336;
-	color: white;
-}
-
-QPushButton:hover{
-	color: white;
-}</string>
-           </property>
-           <property name="text">
-            <string>All</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Resources/Icons/Sidebar/Normal/all.png</normaloff>
-             <normalon>:/Resources/Icons/Sidebar/Pressed/all.png</normalon>:/Resources/Icons/Sidebar/Normal/all.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Downloading">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border: none;
-	text-align: left;
-	color: #2196f3;
-}
-
-QPushButton:checked{
-	background-color: #2196f3;
-	color: white;
-}
-
-QPushButton:hover{
-	color: white;
-}</string>
-           </property>
-           <property name="text">
-            <string>Downloading</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Resources/Icons/Sidebar/Normal/downloading.png</normaloff>
-             <normalon>:/Resources/Icons/Sidebar/Pressed/downloading.png</normalon>:/Resources/Icons/Sidebar/Normal/downloading.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Seeding">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border: none;
-	text-align: left;
-	color: #009688;
-}
-
-QPushButton:checked{
-	background-color: #009688;
-	color: white;
-}
-
-QPushButton:hover{
-	color: white;
-}</string>
-           </property>
-           <property name="text">
-            <string>Seeding</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Resources/Icons/Sidebar/Normal/seeding.png</normaloff>
-             <normalon>:/Resources/Icons/Sidebar/Pressed/seeding.png</normalon>:/Resources/Icons/Sidebar/Normal/seeding.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="Finished">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border: none;
-	text-align: left;
-	color: #4caf50;
-}
-
-QPushButton:checked{
-	background-color: #4caf50;
-	color: white;
-}
-
-QPushButton:hover{
-	color: white;
-}</string>
-           </property>
-           <property name="text">
-            <string>Finished</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Resources/Icons/Sidebar/Normal/finished.png</normaloff>
-             <normalon>:/Resources/Icons/Sidebar/Pressed/finished.png</normalon>:/Resources/Icons/Sidebar/Normal/finished.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="waiting">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border: 0px;
-	text-align: left;
-	color: #ff9800;
-	text-decoration: none;
-}
-
-QPushButton:checked{
-	background-color: #ff9800;
-	color: white;
-}
-
-QPushButton:hover{
-	color: white;
-}</string>
-           </property>
-           <property name="text">
-            <string>Waiting</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources.qrc">
-             <normaloff>:/Resources/Icons/Sidebar/Normal/waiting.png</normaloff>
-             <normalon>:/Resources/Icons/Sidebar/Pressed/waiting.png</normalon>:/Resources/Icons/Sidebar/Normal/waiting.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-           <property name="autoExclusive">
-            <bool>true</bool>
-           </property>
-           <property name="flat">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>91</height>
-            </size>
-           </property>
-          </spacer>
+          <widget class="QTableView" name="tableView"/>
          </item>
         </layout>
        </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="styleSheet">
-       <string notr="true">QTabWidget::pane {
-	border: 0;
-}
-
-QTabBar::tab {
-	padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-QTabBar::tab:selected {
-	color: white;
-	background-color: #d64937;
-}
-
-QTabBar::tab:!selected{
-	color: white;
-	background-color: #ab3a2c;
-	margin-top: 2px;
-}</string>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <property name="styleSheet">
-        <string notr="true">background-color: #fff</string>
-       </property>
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QTableView" name="tableView"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Tab 2</string>
-       </attribute>
+       <widget class="QWidget" name="TabFiles">
+        <attribute name="title">
+         <string>Files</string>
+        </attribute>
+       </widget>
+       <widget class="QWidget" name="TabSpeed">
+        <attribute name="title">
+         <string>Speed</string>
+        </attribute>
+       </widget>
       </widget>
      </widget>
     </item>

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QPropertyAnimation>
 
+#include "torrentlistmodel.h"
+
 namespace Ui {
 class LvTorrent;
 }
@@ -14,6 +16,7 @@ class LvTorrent : public QMainWindow {
 private:
     QPropertyAnimation *m_SidebarAnimator;
     bool m_SidebarIsShown = true;
+    TorrentListModel *m_ListModel;
 
 public:
     explicit LvTorrent(QWidget *parent = 0);
