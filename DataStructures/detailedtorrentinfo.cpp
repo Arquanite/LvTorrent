@@ -5,7 +5,12 @@ DetailedTorrentInfo::DetailedTorrentInfo()
 
 }
 
-DetailedTorrentInfo::DetailedTorrentInfo(libtorrent::torrent_handle lol)
+DetailedTorrentInfo::DetailedTorrentInfo(libtorrent::torrent_handle handle)
 {
-    lol.status();
+    handle.status();
+}
+
+void DetailedTorrentInfo::UpdateData(libtorrent::torrent_handle handle)
+{
+
 }

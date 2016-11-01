@@ -5,6 +5,10 @@ BasicTorrentInfo::BasicTorrentInfo(){
 }
 
 BasicTorrentInfo::BasicTorrentInfo(libtorrent::torrent_handle handle){
+    UpdateData(handle);
+}
+
+void BasicTorrentInfo::UpdateData(libtorrent::torrent_handle handle){
     libtorrent::torrent_status status = handle.status();
     m_Size_R = status.total_wanted;
     m_Downloaded_R = status.total_wanted_done;
@@ -15,7 +19,8 @@ BasicTorrentInfo::BasicTorrentInfo(libtorrent::torrent_handle handle){
 
     m_DownloadRate_R = status.download_rate;
     m_UploadRate_R = status.upload_rate;
-    m_EstimatedTime_R = m_ToDownload_R / m_DownloadRate_R;
+    if(m_DownloadRate_R == 0) m_EstimatedTime_R = -1;
+    else m_EstimatedTime_R = m_ToDownload_R / m_DownloadRate_R;
 
     m_State_R = (TorrentState)status.state;
     if(status.paused) status.auto_managed ? m_State_R = InQueue : m_State_R = Paused;

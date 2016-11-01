@@ -97,6 +97,7 @@ private:
 public:
     BasicTorrentInfo();
     BasicTorrentInfo(libtorrent::torrent_handle handle);
+    void UpdateData(libtorrent::torrent_handle handle);
     static QString BytesToString(size_t bytes, bool isSpeedUnit = false);
     static QString SecondsToString(int seconds);
     static QString PercentToString(float percent);

@@ -2,13 +2,16 @@
 #include "ui_lvtorrent.h"
 
 #include <QScrollBar>
+#include <QDebug>
+#include <QSpacerItem>
 
 LvTorrent::LvTorrent(QWidget *parent) : QMainWindow(parent), ui(new Ui::LvTorrent){
     ui->setupUi(this);
-    m_SidebarAnimator= new QPropertyAnimation(ui->Sidebar, "maximumSize");
+    m_SidebarAnimator = new QPropertyAnimation(ui->Sidebar, "maximumSize");
 
     connect(ui->Filter, &QAbstractButton::clicked, this, &LvTorrent::ToggleSidebar);
-    m_ListModel = new TorrentListModel();
+    m_ListModel = new TorrentListModel(m_Session.BasicInfo());
+    connect(&m_Session, SIGNAL(BasicInfoUpdated()), m_ListModel, SLOT(refresh()));
     ui->TorrentList->setModel(m_ListModel);
     ui->TorrentList->horizontalScrollBar()->setStyleSheet("QScrollBar {"
                                                             "background: #eeeeee;"
@@ -28,6 +31,8 @@ LvTorrent::LvTorrent(QWidget *parent) : QMainWindow(parent), ui(new Ui::LvTorren
                                                             "border: none;"
                                                             "background: none;}");
 
+    connect(ui->AddTorrent, &ToolbarButton::clicked, this, &LvTorrent::AddTorrentFile);
+    connect(ui->Limits, &ToolbarButton::clicked, this, &LvTorrent::AddMagnetLink);
 }
 
 LvTorrent::~LvTorrent(){
@@ -38,7 +43,7 @@ LvTorrent::~LvTorrent(){
 
 void LvTorrent::ShowSidebar(){
     m_SidebarAnimator->setDuration(1000);
-    QSize dsize = ui->Sidebar->size();
+    QSize dsize = ui->Sidebar->maximumSize();
     m_SidebarAnimator->setStartValue(dsize);
     dsize.setWidth(dsize.width()+150);
     m_SidebarAnimator->setEndValue(dsize);
@@ -48,17 +53,41 @@ void LvTorrent::ShowSidebar(){
 
 void LvTorrent::HideSidebar(){
     m_SidebarAnimator->setDuration(1000);
-    QSize dsize = ui->Sidebar->size();
+    QSize dsize = ui->Sidebar->maximumSize();
     m_SidebarAnimator->setStartValue(dsize);
     dsize.setWidth(dsize.width()-150);
     m_SidebarAnimator->setEndValue(dsize);
     m_SidebarAnimator->setEasingCurve(QEasingCurve::OutBounce);
     m_SidebarAnimator->start();
-
 }
 
 void LvTorrent::ToggleSidebar(){
     if(m_SidebarAnimator->state() == QAbstractAnimation::Running) return;
     m_SidebarIsShown ? HideSidebar() : ShowSidebar();
     m_SidebarIsShown = !m_SidebarIsShown;
+}
+
+void LvTorrent::SetFilter(View::Filter filter){
+    //TODO: Implement SetFilter()
+}
+
+void LvTorrent::AddTorrentFile(){
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select .torrent file"), 0, tr("torrent files (*.torrent)"));
+    QString savePath = QFileDialog::getExistingDirectory(this, "Where you want to save downloaded files?");
+    m_Session.AddTorrentFile(fileName, savePath);
+    m_ListModel->refresh();
+}
+
+void LvTorrent::AddMagnetLink(){
+    //TODO: Implement AddMagnetLink()
+    m_Session.UpdateBasicInfo();
+    m_ListModel->refresh();
+}
+
+void LvTorrent::ResumeTorrent(){
+    //TODO: Implement ResumeTorrent()
+}
+
+void LvTorrent::PauseTorrent(){
+    //TODO: Implement me PauseTorrent();
 }

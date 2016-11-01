@@ -7,7 +7,9 @@
 class DetailedTorrentInfo {
 public:
     DetailedTorrentInfo();
-    DetailedTorrentInfo(libtorrent::torrent_handle lol);
+    DetailedTorrentInfo(libtorrent::torrent_handle handle);
+    void UpdateData(libtorrent::torrent_handle handle);
+    //TODO: Implement DetailedTorrentInfo class
 };
 
 #endif // DETAILEDTORRENTINFO_H

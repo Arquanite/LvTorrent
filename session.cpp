@@ -1,5 +1,7 @@
 #include "session.h"
 
+
+#include <QDebug>
 Session::Session(QObject *parent) : QObject(parent){
     m_AppLocation = QApplication::applicationDirPath() + "/";
 }
@@ -13,6 +15,7 @@ bool Session::AddTorrentFile(QString filePath, QString savePath){
     lt::torrent_handle handle = m_Session.add_torrent(atp);
     QFile::copy(filePath, m_AppLocation + "Torrents/" + QString::fromStdString(handle.status().name) + ".torrent");
     m_Torrents.insert(QString::fromStdString(handle.status().name), QString::fromStdString(handle.status().save_path));
+    m_Handles.push_back(handle);
     return true;
 }
 
@@ -30,6 +33,7 @@ bool Session::AddTorrentFile(QString filePath, QString savePath, QString resumeD
     lt::torrent_handle handle = m_Session.add_torrent(atp);
     QFile::copy(filePath, m_AppLocation + "Torrents/" + QString::fromStdString(handle.status().name) + ".torrent");
     m_Torrents.insert(QString::fromStdString(handle.status().name), QString::fromStdString(handle.status().save_path));
+    m_Handles.push_back(handle);
     return true;
 }
 
@@ -40,24 +44,27 @@ void Session::AddMagnetLink(QString magnet, QString savePath){
     //TODO: Magnet2Torrent
 }
 
-bool Session::PauseTorrent(int ID){
-    if(ID >= m_Handles.size()) return false;
+bool Session::PauseTorrent(){
+    int ID = m_Selected;
+    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
     m_Handles.at(ID).pause();
     return true;
 }
 
-bool Session::ResumeTorrent(int ID){
-    if(ID >= m_Handles.size()) return false;
+bool Session::ResumeTorrent(){
+    int ID = m_Selected;
+    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
     m_Handles.at(ID).resume();
     return true;
 }
 
-bool Session::RemoveTorrent(int ID, bool deleteFiles){
-    if(ID >= m_Handles.size()) return false;
+bool Session::RemoveTorrent(bool deleteFiles){
+    int ID = m_Selected;
+    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
     if(deleteFiles) m_Session.remove_torrent(m_Handles.at(ID), m_Session.delete_files);
     else m_Session.remove_torrent(m_Handles.at(ID));
     return true;
-    //TODO: remove files
+    //TODO: remove files (*.torrent, *.resume)
 }
 
 bool Session::SaveFastResumeData(){
@@ -117,16 +124,12 @@ bool Session::LoadTorrents(){
     return true;
 }
 
-QVector<BasicTorrentInfo> Session::BasicInfo(){
-    QVector<BasicTorrentInfo> Info;
-    for(auto H : m_Handles){
-        Info.append(BasicTorrentInfo(H));
-    }
-    return Info;
+QVector<BasicTorrentInfo>* Session::BasicInfo(){
+    return &m_BasicInfo;
 }
 
-DetailedTorrentInfo Session::DetailedInfo(int ID){
-    return DetailedTorrentInfo(m_Handles.at(ID));
+DetailedTorrentInfo* Session::DetailedInfo(){
+    return &m_DetailedInfo;
 }
 
 void Session::Pause(){
@@ -135,4 +138,25 @@ void Session::Pause(){
 
 void Session::Resume(){
     m_Session.resume();
+}
+
+void Session::UpdateBasicInfo(){
+    qDebug()<<"Try to Update";
+    qDebug()<<m_Handles.size()<<" size";
+    if(m_Handles.isEmpty()) return;
+    qDebug()<<"Update";
+    m_BasicInfo.resize(m_Handles.size());
+    for(int i=0; i<m_Handles.size(); i++){
+        m_BasicInfo[i].UpdateData(m_Handles.at(i));
+    }
+    if(m_BasicInfo.capacity() > m_BasicInfo.size() * 2) m_BasicInfo.squeeze();
+    emit BasicInfoUpdated();
+}
+
+void Session::UpdateDetailedInfo(){
+    if(m_Handles.isEmpty()) return;
+    int ID = m_Selected;
+    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return;
+    m_DetailedInfo.UpdateData(m_Handles.at(ID));
+    emit DetailedInfoUpdated();
 }

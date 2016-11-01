@@ -27,6 +27,9 @@ private:
     QString m_AppLocation;
     QVector<lt::torrent_handle> m_Handles;
     QMap<QString, QString> m_Torrents;
+    int m_Selected = 0;
+    QVector<BasicTorrentInfo> m_BasicInfo;
+    DetailedTorrentInfo m_DetailedInfo;
 
     bool MakeTorrentFromMagnet(int ID);
 public:
@@ -36,18 +39,25 @@ public:
     bool AddTorrentFile(QString filePath, QString savePath, QString resumeData);
     void AddMagnetLink(QString magnet, QString savePath);
 
-    bool PauseTorrent(int ID);
-    bool ResumeTorrent(int ID);
-    bool RemoveTorrent(int ID, bool deleteFiles = false);
+    bool PauseTorrent();
+    bool ResumeTorrent();
+    bool RemoveTorrent(bool deleteFiles = false);
 
     bool SaveFastResumeData();
     bool LoadTorrents();
 
-    QVector<BasicTorrentInfo> BasicInfo();
-    DetailedTorrentInfo DetailedInfo(int ID);
+    QVector<BasicTorrentInfo> *BasicInfo();
+    DetailedTorrentInfo *DetailedInfo();
 
     void Pause();
     void Resume();
+
+public slots:
+    void UpdateBasicInfo();
+    void UpdateDetailedInfo();
+signals:
+    void BasicInfoUpdated();
+    void DetailedInfoUpdated();
 };
 
 #endif // SESSION_H
