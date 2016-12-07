@@ -38,7 +38,9 @@ void BasicTorrentInfo::UpdateData(libtorrent::torrent_handle handle){
 
     m_DownloadRate = BytesToString(m_DownloadRate_R, true);
     m_UploadRate = BytesToString(m_UploadRate_R, true);
-    m_EstimatedTime = SecondsToString(m_EstimatedTime_R);
+    if(m_State_R == Downloading) m_EstimatedTime = SecondsToString(m_EstimatedTime_R);
+    else if(m_State_R == Finished) m_EstimatedTime = QObject::tr("Done");
+    else m_EstimatedTime = "∞";
 
     m_State = StateToString(m_State_R);
     m_Progress = PercentToString(m_Progress_R);
@@ -56,13 +58,13 @@ QString BasicTorrentInfo::BytesToString(size_t bytes, bool isSpeedUnit){
         unit++;
     }
     bytes /= 10;
-    QString string = QString::number(bytes) + " " + units[unit];
+    QString string = QString::number(bytes) + " " + units[unit] + "B";
     if(isSpeedUnit) string += "/s";
     return string;
 }
 
 QString BasicTorrentInfo::SecondsToString(int seconds){
-    int minutes, hours, days;
+    int minutes = 0, hours = 0, days = 0;
     if(seconds >= 86400){ //there are 86400 seconds in a day
         days = seconds/86400;
         seconds %= 86400;
@@ -80,15 +82,14 @@ QString BasicTorrentInfo::SecondsToString(int seconds){
     else if(days > 0) string = QString().number(days) + "d " + QString().number(hours) + "h";
     else if(hours > 0) string = QString().number(hours) + "h " + QString().number(minutes) + "m";
     else if(minutes > 0) string = QString().number(minutes) + "m " + QString().number(seconds) + "s";
-    else if(seconds > 0) string = QString().number(seconds) + "s";
-    else string = QObject::tr("Done");
+    else string = QString().number(seconds) + "s";
 
     return string;
 }
 
 QString BasicTorrentInfo::PercentToString(float percent){
     int round = percent *1000;
-    percent = round /100.0;
+    percent = round /10.0;
     return QString::number(percent) + "%";
 }
 

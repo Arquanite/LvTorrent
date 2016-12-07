@@ -40,3 +40,6 @@ FORMS    += UI/lvtorrent.ui \
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    some_random

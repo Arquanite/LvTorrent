@@ -1,26 +1,54 @@
 #include "session.h"
 
-
+#include <QFile>
+#include <QDir>
 #include <QDebug>
+#include "libtorrent/torrent_info.hpp"
+#include "libtorrent/alert_types.hpp"
+#include "libtorrent/bencode.hpp"
+
+
 Session::Session(QObject *parent) : QObject(parent){
     m_AppLocation = QApplication::applicationDirPath() + "/";
+    qDebug()<<"Info: Session started in directory"<<QString(m_AppLocation);
+    if(!QDir(m_AppLocation+"Torrents").exists()){
+        qDebug()<<"'Torrents' directory does not exist, creating new...";
+        if(QDir(m_AppLocation).mkdir("Torrents")) qDebug()<<"Success";
+        else qDebug()<<"Failure";
+    }
+
+    m_Updater.setInterval(1000);
+    m_Updater.start();
+    connect(&m_Updater, &QTimer::timeout, this, &Session::UpdateBasicInfo);
+    connect(&m_Updater, &QTimer::timeout, this, &Session::UpdateDetailedInfo);
 }
 
 bool Session::AddTorrentFile(QString filePath, QString savePath){
-    if(!QFile(filePath).exists()) return false;
+    if(!QFile(filePath).exists()){
+        qDebug()<<"Error: Adding .torrent failed, file does not exist!";
+        return false;
+    }
     lt::add_torrent_params atp;
     atp.save_path = savePath.toStdString();
     std::shared_ptr<lt::torrent_info> ti(new lt::torrent_info(filePath.toStdString()));
     atp.ti = ti;
     lt::torrent_handle handle = m_Session.add_torrent(atp);
-    QFile::copy(filePath, m_AppLocation + "Torrents/" + QString::fromStdString(handle.status().name) + ".torrent");
+    qDebug()<<QFile::copy(filePath, m_AppLocation + "Torrents/" + QString::fromStdString(handle.status().name) + ".torrent");
     m_Torrents.insert(QString::fromStdString(handle.status().name), QString::fromStdString(handle.status().save_path));
     m_Handles.push_back(handle);
+    qDebug()<<"Info: .torrent file added";
     return true;
 }
 
 bool Session::AddTorrentFile(QString filePath, QString savePath, QString resumeData){
-    if(!QFile(filePath).exists()) return false;
+    if(!QFile(filePath).exists()){
+        qDebug()<<"Error: Adding .torrent with resume data failed, file does not exist!";
+        return false;
+    }
+    if(!QFile(resumeData).exists()){
+        qDebug()<<"Error: Adding .torrent with resume data failed, resume data does not exist!";
+        return false;
+    }
     lt::add_torrent_params atp;
     atp.save_path = savePath.toStdString();
     std::shared_ptr<lt::torrent_info> ti(new lt::torrent_info(filePath.toStdString()));
@@ -34,6 +62,7 @@ bool Session::AddTorrentFile(QString filePath, QString savePath, QString resumeD
     QFile::copy(filePath, m_AppLocation + "Torrents/" + QString::fromStdString(handle.status().name) + ".torrent");
     m_Torrents.insert(QString::fromStdString(handle.status().name), QString::fromStdString(handle.status().save_path));
     m_Handles.push_back(handle);
+    qDebug()<<"Info: .torrent file added";
     return true;
 }
 
@@ -46,21 +75,21 @@ void Session::AddMagnetLink(QString magnet, QString savePath){
 
 bool Session::PauseTorrent(){
     int ID = m_Selected;
-    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
+    if(ID >= m_Handles.size() or m_Handles.isEmpty() or ID < 0) return false;
     m_Handles.at(ID).pause();
     return true;
 }
 
 bool Session::ResumeTorrent(){
     int ID = m_Selected;
-    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
+    if(ID >= m_Handles.size() or m_Handles.isEmpty() or ID < 0) return false;
     m_Handles.at(ID).resume();
     return true;
 }
 
 bool Session::RemoveTorrent(bool deleteFiles){
     int ID = m_Selected;
-    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return false;
+    if(ID >= m_Handles.size() or m_Handles.isEmpty() or ID < 0) return false;
     if(deleteFiles) m_Session.remove_torrent(m_Handles.at(ID), m_Session.delete_files);
     else m_Session.remove_torrent(m_Handles.at(ID));
     return true;
@@ -140,11 +169,20 @@ void Session::Resume(){
     m_Session.resume();
 }
 
+int Session::UpdateInterval(){
+    return m_Updater.interval();
+}
+
+bool Session::setUpdateInterval(int miliseconds){
+    if(miliseconds<=0) return false;
+
+    m_Updater.setInterval(miliseconds);
+    return true;
+}
+
 void Session::UpdateBasicInfo(){
-    qDebug()<<"Try to Update";
-    qDebug()<<m_Handles.size()<<" size";
     if(m_Handles.isEmpty()) return;
-    qDebug()<<"Update";
+    qDebug()<<"Info: Basic info update";
     m_BasicInfo.resize(m_Handles.size());
     for(int i=0; i<m_Handles.size(); i++){
         m_BasicInfo[i].UpdateData(m_Handles.at(i));
@@ -156,7 +194,7 @@ void Session::UpdateBasicInfo(){
 void Session::UpdateDetailedInfo(){
     if(m_Handles.isEmpty()) return;
     int ID = m_Selected;
-    if(ID >= m_Handles.size() || m_Handles.isEmpty() || ID < 0) return;
+    if(ID >= m_Handles.size() or m_Handles.isEmpty() or ID < 0) return;
     m_DetailedInfo.UpdateData(m_Handles.at(ID));
     emit DetailedInfoUpdated();
 }

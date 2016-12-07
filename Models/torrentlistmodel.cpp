@@ -36,6 +36,10 @@ QVariant TorrentListModel::data(const QModelIndex &index, int role) const{
         case 8:
             return m_Info->at(index.row()).EstimatedTime();
         break;
+
+        default:
+            return QVariant();
+        break;
     }
 }
 
@@ -52,26 +56,29 @@ int TorrentListModel::rowCount(const QModelIndex &parent) const {
 }
 
 int TorrentListModel::columnCount(const QModelIndex &parent) const {
-    if (!parent.isValid())
-        return m_Headers.size();
-
-    // FIXME: Implement me!
+    if(parent.isValid()) return 0;
+    return m_Headers.size();
 }
 
 bool TorrentListModel::insertRows(int row, int count, const QModelIndex &parent){
+    if(row < 0 or row >= rowCount() or count <= 0) return false;
+
     beginInsertRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
+    // There is nothing to be done because it works :)
     endInsertRows();
+    return true;
 }
 
 bool TorrentListModel::removeRows(int row, int count, const QModelIndex &parent){
+    if(row < 0 or row >= rowCount() or count <= 0 or count > rowCount()) return false;
+
     beginRemoveRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
+    // FIXME: Implement me! but this may work as is...
     endRemoveRows();
+    return true;
 }
 
 void TorrentListModel::refresh(){
-    qDebug()<<m_Info->size()<<rowCount();
     if(m_Info->size() > m_OldRowCount) insertRows(0,m_Info->size() - m_OldRowCount);
     m_OldRowCount = rowCount();
     emit dataChanged(index(0,0), index(rowCount(), columnCount()));

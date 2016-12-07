@@ -1,21 +1,14 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <QObject>
-#include <QVector>
 #include <QTimer>
-#include <QFile>
-#include <QDir>
-#include <QSharedPointer>
+#include <QVector>
 #include <QDataStream>
 #include <QApplication>
 #include <fstream>
 #include "basictorrentinfo.h"
 #include "detailedtorrentinfo.h"
 #include "libtorrent/session.hpp"
-#include "libtorrent/torrent_info.hpp"
-#include "libtorrent/alert_types.hpp"
-#include "libtorrent/bencode.hpp"
 
 namespace lt = libtorrent;
 
@@ -30,6 +23,7 @@ private:
     int m_Selected = 0;
     QVector<BasicTorrentInfo> m_BasicInfo;
     DetailedTorrentInfo m_DetailedInfo;
+    QTimer m_Updater;
 
     bool MakeTorrentFromMagnet(int ID);
 public:
@@ -51,6 +45,9 @@ public:
 
     void Pause();
     void Resume();
+
+    int UpdateInterval();
+    bool setUpdateInterval(int miliseconds);
 
 public slots:
     void UpdateBasicInfo();

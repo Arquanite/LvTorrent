@@ -31,6 +31,14 @@ LvTorrent::LvTorrent(QWidget *parent) : QMainWindow(parent), ui(new Ui::LvTorren
                                                             "border: none;"
                                                             "background: none;}");
 
+    // make connections
+
+    // session signals
+    connect(&m_Session, &Session::BasicInfoUpdated, m_ListModel, &TorrentListModel::refresh);
+    //connect(&m_Session, &Session::DetailedInfoUpdated, m_ListModel, &TorrentListModel::refresh);
+    // TODO: connect detailed info updates
+
+    // ui signals
     connect(ui->AddTorrent, &ToolbarButton::clicked, this, &LvTorrent::AddTorrentFile);
     connect(ui->Limits, &ToolbarButton::clicked, this, &LvTorrent::AddMagnetLink);
 }
@@ -68,6 +76,7 @@ void LvTorrent::ToggleSidebar(){
 }
 
 void LvTorrent::SetFilter(View::Filter filter){
+    Q_UNUSED(filter);
     //TODO: Implement SetFilter()
 }
 
@@ -90,4 +99,9 @@ void LvTorrent::ResumeTorrent(){
 
 void LvTorrent::PauseTorrent(){
     //TODO: Implement me PauseTorrent();
+}
+
+void LvTorrent::UpdateAll(){
+    m_Session.UpdateBasicInfo();
+    m_ListModel->refresh();
 }

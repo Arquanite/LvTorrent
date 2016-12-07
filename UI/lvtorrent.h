@@ -48,9 +48,11 @@ public slots:
     void ResumeTorrent();
     void PauseTorrent();
 
+    void UpdateAll();
 
 
 private:
+    QTimer *m_Updater;
     Ui::LvTorrent *ui;
 };
 
